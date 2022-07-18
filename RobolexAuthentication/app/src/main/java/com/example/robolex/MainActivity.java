@@ -11,6 +11,7 @@ import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Intent intent;
     String profile_pic_url;
     boolean statusPassed;
+    int reloads;
 
     String url = "https://www.roblox.com/NewLogin";
 //  final String filename= URLUtil.guessFileName(URLUtil.guessUrl(url));
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         statusPassed = false;
 
         intent = new Intent(this, APICallPage.class);
+        reloads = 0;
 
         getSupportActionBar().hide();
 
@@ -126,9 +129,24 @@ public class MainActivity extends AppCompatActivity {
                                 openActivityAPICallPage();
                             }
                         }
+                        Log.d("ROBOLEX: ", webView.getUrl());
+                        if(webView.getUrl().equals("https://www.roblox.com/home")){
+                            if(reloads < 1){
+                                Log.d("ROBOLEX: ", "reloading");
+                                reloads += 1;
+                                final Handler handler = new Handler(Looper.getMainLooper());
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        webView.loadUrl("https://www.roblox.com/home");
+                                    }
+                                }, 2000);
+                            }
+                        }
                     }
                 });
             }
+            Log.d("ROBOLEX: ", String.valueOf(reloads));
             progressBar.setVisibility(View.GONE);
         }
 

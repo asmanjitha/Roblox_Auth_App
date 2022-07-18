@@ -36,6 +36,7 @@ public class ConnectedStateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connected_state);
+        getSupportActionBar().hide();
         Bundle extras = getIntent().getExtras();
 
         profile_pic = findViewById(R.id.userImage);

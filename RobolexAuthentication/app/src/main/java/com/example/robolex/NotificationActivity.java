@@ -59,6 +59,7 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+        getSupportActionBar().hide();
 
         notif_datetimes = new ArrayList<String>();
         notif_msgs = new ArrayList<String>();
